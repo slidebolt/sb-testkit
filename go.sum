@@ -90,6 +90,8 @@ github.com/slidebolt/sb-storage-sdk v1.0.2 h1:EWXpr6jurjas42XCar+CYed4kSc5y1NQn7
 github.com/slidebolt/sb-storage-sdk v1.0.2/go.mod h1:0rwsfUNMzhnp/unyUPFaoiNTMTzvZrvETOetRI8QU1w=
 github.com/slidebolt/sb-storage-server v1.0.2 h1:PGV1WdjRPgR/u031nGJcpNEht+u150fqsvpsSVLCZGo=
 github.com/slidebolt/sb-storage-server v1.0.2/go.mod h1:4/uC1mW0hhM9z8f9w+RyDJVtZtqNjVcc6T2wxpENvn4=
+github.com/slidebolt/sb-virtual v1.0.2 h1:ppz7lpiGbluh3rrWP6wS6+wYSgZ4ak2PLmwAhDcrt2U=
+github.com/slidebolt/sb-virtual v1.0.2/go.mod h1:IruelfMhM7CIrY/fZVUsq4DPKQw1ym3cH5hff0009+8=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=

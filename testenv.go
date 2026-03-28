@@ -11,6 +11,7 @@ import (
 	scriptserver "github.com/slidebolt/sb-script/server"
 	storage "github.com/slidebolt/sb-storage-sdk"
 	server "github.com/slidebolt/sb-storage-server"
+	"github.com/slidebolt/sb-virtual/virtual"
 )
 
 // TestEnv simulates the manager for tests. It creates mock services
@@ -85,6 +86,26 @@ func (e *TestEnv) Start(service string) {
 			e.t.Fatalf("testkit: start sb-script: %v", err)
 		}
 		e.t.Cleanup(func() { svc.Shutdown(); scriptMsg.Close() })
+
+	case "sb-virtual":
+		// sb-virtual gets its own dedicated connection and subscribes to
+		// *.*.*.command.> to fan out group commands. Requires storage to be
+		// started first.
+		virtualMsg, err := messenger.Connect(map[string]json.RawMessage{
+			"messenger": e.messengerPayload,
+		})
+		if err != nil {
+			e.t.Fatalf("testkit: sb-virtual messenger: %v", err)
+		}
+		h := virtual.NewHandler(virtualMsg, e.Storage())
+		sub, err := h.Subscribe()
+		if err != nil {
+			e.t.Fatalf("testkit: sb-virtual subscribe: %v", err)
+		}
+		if err := virtualMsg.Flush(); err != nil {
+			e.t.Fatalf("testkit: flush sb-virtual subscription: %v", err)
+		}
+		e.t.Cleanup(func() { sub.Unsubscribe(); virtualMsg.Close() })
 
 	default:
 		e.t.Fatalf("testkit: unknown service %q", service)
