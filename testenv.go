@@ -123,6 +123,12 @@ func (e *TestEnv) MessengerPayload() json.RawMessage {
 	return e.messengerPayload
 }
 
+// StoragePayload returns the raw JSON payload that plugins use to connect
+// to the shared storage service.
+func (e *TestEnv) StoragePayload() json.RawMessage {
+	return json.RawMessage(`{"client":"mock"}`)
+}
+
 // Storage returns the storage client. Panics if storage was not started.
 func (e *TestEnv) Storage() storage.Storage {
 	if e.sch == nil {
