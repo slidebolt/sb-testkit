@@ -4,10 +4,10 @@ go 1.26.1
 
 require (
 	github.com/slidebolt/sb-messenger-sdk v1.0.8
-	github.com/slidebolt/sb-script v1.0.15
+	github.com/slidebolt/sb-script v1.0.16
 	github.com/slidebolt/sb-storage-sdk v1.0.8
 	github.com/slidebolt/sb-storage-server v1.0.11
-	github.com/slidebolt/sb-virtual v1.0.14
+	github.com/slidebolt/sb-virtual v1.0.15
 )
 
 require (
