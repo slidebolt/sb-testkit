@@ -8,6 +8,7 @@ import (
 	"testing"
 
 	messenger "github.com/slidebolt/sb-messenger-sdk"
+	schedulerapp "github.com/slidebolt/sb-scheduler/app"
 	scriptserver "github.com/slidebolt/sb-script/server"
 	storage "github.com/slidebolt/sb-storage-sdk"
 	server "github.com/slidebolt/sb-storage-server"
@@ -86,6 +87,19 @@ func (e *TestEnv) Start(service string) {
 			e.t.Fatalf("testkit: start sb-script: %v", err)
 		}
 		e.t.Cleanup(func() { svc.Shutdown(); scriptMsg.Close() })
+
+	case "scheduler":
+		if e.sch == nil {
+			e.t.Fatal("testkit: scheduler requires storage")
+		}
+		svc := schedulerapp.New()
+		if _, err := svc.OnStart(map[string]json.RawMessage{
+			"messenger": e.MessengerPayload(),
+			"storage":   e.StoragePayload(),
+		}); err != nil {
+			e.t.Fatalf("testkit: start scheduler: %v", err)
+		}
+		e.t.Cleanup(func() { _ = svc.OnShutdown() })
 
 	case "sb-virtual":
 		// sb-virtual gets its own dedicated connection and subscribes to
